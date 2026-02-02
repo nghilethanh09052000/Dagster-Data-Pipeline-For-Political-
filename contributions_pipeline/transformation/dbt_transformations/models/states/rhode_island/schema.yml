@@ -1,0 +1,133 @@
+version: 2
+
+models:
+  - name: rhode_island_individual_contributions_transform
+    description: >
+      Transformed contribution data from Rhode Island campaign finance reports,
+      including parsed contributor and employer information. Only includes transactions
+      where TransType = 'Contribution'.
+    columns:
+      - name: source
+        description: Source system identifier, always 'RI' for Rhode Island
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['RI']
+
+      - name: source_id
+        description: Unique surrogate key generated from ContributionID + FullName + Amount hash
+        tests:
+          - not_null
+          - unique
+          - assert_has_prefix:
+              prefix: 'RI_'
+
+      - name: committee_id
+        description: Committee ID prefixed with 'RI_' using OrganizationName
+        tests:
+          - not_null
+          - assert_has_prefix:
+              prefix: 'RI_'
+
+      - name: name
+        description: Full name of contributor parsed from FirstName/LastName
+        tests:
+          - not_null
+
+      - name: city
+        description: Contributor city extracted from CityStZip field
+        tests:
+          - not_null
+
+      - name: state
+        description: Contributor state abbreviation parsed from CityStZip
+
+      - name: zip_code
+        description: Contributor ZIP code validated from CityStZip
+
+      - name: employer
+        description: Employer name parsed from EmployerName field
+
+      - name: employer_address1
+        description: Primary employer address line from EmpAddress
+
+      - name: employer_address2
+        description: Secondary employer address line from EmpAddress
+
+      - name: employer_city
+        description: Employer city parsed from EmpCityStZip
+
+      - name: employer_state
+        description: Employer state abbreviation parsed from EmpCityStZip
+
+      - name: employer_zip
+        description: Employer ZIP code validated from EmpCityStZip
+
+      - name: occupation
+        description: Placeholder field (not available in source data)
+
+      - name: amount
+        description: Contribution amount in USD with currency symbols removed
+        tests:
+          - not_null
+
+      - name: contribution_datetime
+        description: Timestamp parsed from ReceiptDate (MM/DD/YYYY format)
+        tests:
+          - not_null
+
+      - name: insert_datetime
+        description: Audit timestamp when record was loaded
+        tests:
+          - not_null
+
+  - name: rhode_island_committee_master_transform
+    description: >
+      Master committee data derived from contribution patterns and organization information.
+      Each row represents a unique committee with aggregated contribution metrics.
+    columns:
+      - name: source
+        description: Static source identifier 'RI'
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['RI']
+
+      - name: committee_id
+        tests:
+          - assert_has_prefix:
+              prefix: 'RI_' 
+
+      - name: committee_designation
+        description: Placeholder for future committee classification
+
+      - name: name
+        description: Organization name from contribution records
+        tests:
+          - not_null
+
+      - name: address1
+        description: Primary address line from most recent contributor
+
+      - name: address2
+        description: Secondary address line from contributor (if available)
+
+      - name: city
+        description: Inferred committee city from contributor clusters
+
+      - name: state
+        description: Dominant state from contributor locations
+
+      - name: zip_code
+        description: Most frequent ZIP code from contributors
+
+      - name: affiliation
+        description: Dominant employer affiliation pattern
+
+      - name: district
+        description: Placeholder for district mapping (requires external data)
+
+      - name: insert_datetime
+        description: Timestamp of record creation
+        tests:
+          - not_null

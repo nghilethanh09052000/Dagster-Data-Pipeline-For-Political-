@@ -1,0 +1,117 @@
+version: 2
+
+models:
+  - name: oregon_individual_contributions_transform
+    description: >
+      Transformed individual contribution data from oregon APOC reports,
+    columns:
+      - name: source
+        description: Source system or state
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['OR']
+
+      - name: source_id
+        description: ID for the contribution, prefixed with 'OR_'.
+        tests:
+          - unique
+          - not_null
+          - assert_has_prefix:
+              prefix: 'OR_'
+
+      - name: committee_id
+        description: Committee ID if applicable, ID for the contribution, prefixed with 'OR_'.
+        tests:
+          - not_null
+          - assert_has_prefix:
+              prefix: 'OR_'
+
+      - name: name
+        description: Contributor name
+        tests:
+          - not_null
+
+      - name: city
+        description: Contributor city
+
+      - name: state
+        description: Contributor state
+
+      - name: zip_code
+        description: Contributor ZIP code
+
+      - name: employer
+        description: Contributor's employer
+
+      - name: occupation
+        description: Contributor's occupation
+
+      - name: amount
+        description: Contribution amount (numeric)
+        tests:
+          - not_null
+
+      - name: contribution_datetime
+        description: Timestamp when contribution was submitted
+        tests:
+          - not_null
+
+      - name: insert_datetime
+        description: When this record was inserted into the database
+        tests:
+          - not_null
+
+  - name: oregon_committee_master_transform
+    description: >
+      Transformed oregon candidate data mapped into the unified committee master schema.
+      Each row represents a committee with normalized structure and a unique generated ID.
+    columns:
+      - name: source
+        description: Static source identifier, 'OR' for oregon
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['OR']
+
+      - name: committee_id
+        description: Generated unique ID for the committee using candidate name, year, and address
+        tests:
+          - not_null
+          - unique
+          - assert_has_prefix:
+              prefix: 'OR_'
+
+      - name: committee_designation
+        description: Placeholder for committee designation (currently null)
+
+      - name: name
+        description: Candidate or committee name
+        tests:
+          - not_null
+
+      - name: address1
+        description: Primary address line
+
+      - name: address2
+        description: Secondary address line (currently null)
+
+      - name: city
+        description: City of the candidate or committee
+
+      - name: state
+        description: State or region (from state_region field)
+
+      - name: zip_code
+        description: ZIP code. It should have test not not_null due to extracting from address
+
+      - name: affiliation
+        description: Political affiliation/party
+
+      - name: district
+        description: Placeholder for district (currently null)
+
+      - name: insert_datetime
+        description: Timestamp of record insertion in UTC
+        tests:
+          - not_null

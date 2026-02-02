@@ -1,0 +1,151 @@
+version: 2
+
+models:
+  - name: individual_contributions
+    description: >
+      Transformed individual contribution data from all states and FEC reports.
+      Unified under a single schema with consistent field naming.
+    columns:
+      - name: source
+        description: Source system or state
+        tests:
+          - accepted_values:
+              values: [
+                "FL", "FEC", "SD", "AL", "AK", "NJ", "MI", "SC", "AZ", "AR",
+                "CT", "IA", "KS", "KY", "MT", "NE", "NH", "NM", "OK", "TN",
+                "TX", "WA", "WV", "WI", "DE", "IL", "MD", "CA", "CO", "GA",
+                "DC", "HI", "IN", "MA", "MN", "MO", "LA", "NY", "MS", "ID",
+                "ND", "OH", "ME", "VT", "NV", "NC", "OR", "PA", "VA", "UT",
+                "WY", "RI","OH"
+              ]
+
+      # - name: source_id
+      #   description: ID for the contribution, prefixed with the state abbreviation.
+      #   tests:
+      #     - not_null
+      #     - unique
+
+      - name: committee_id
+        description: Committee ID if applicable
+        tests:
+          - not_null
+
+      # - name: name
+      #   description: Contributor name
+      #   tests:
+      #     - not_null
+
+      - name: city
+        description: Contributor city
+
+      - name: state
+        description: Contributor state
+
+      - name: zip_code
+        description: Contributor ZIP code
+
+      - name: employer
+        description: Contributor's employer
+
+      - name: occupation
+        description: Contributor's occupation
+
+      - name: amount
+        description: Contribution amount (numeric)
+        tests:
+          - not_null
+
+      - name: contribution_datetime
+        description: Timestamp when contribution was submitted
+        tests:
+          - not_null
+
+      # - name: insert_datetime
+      #   description: When this record was inserted into the database
+      #   tests:
+      #     - not_null
+
+  - name: committee_master
+    description: >
+      Transformed committee data from all states mapped into the unified master schema.
+      Each row represents a committee with normalized structure and unique identifiers.
+    columns:
+      - name: source
+        description: Static source identifier (state or FEC)
+        tests:
+          - accepted_values:
+              values: [
+                      "FL", "FEC", "SD", "AL", "AK", "NJ", "MI", "SC", "AZ", "AR",
+                      "CT", "IA", "KS", "KY", "MT", "NE", "NH", "NM", "OK", "TN",
+                      "TX", "WA", "WV", "WI", "DE", "IL", "MD", "CA", "CO", "GA",
+                      "DC", "HI", "IN", "MA", "MN", "MO", "LA", "NY", "MS", "ID",
+                      "ND", "OH", "ME", "VT", "NV", "NC", "OR", "PA", "VA", "UT",
+                      "WY", "RI" , "OH"
+                    ]
+
+      - name: committee_id
+        description: Generated unique ID for the committee using candidate name, year, and address
+        tests:
+          - not_null
+          - unique
+
+      - name: committee_designation
+        description: Committee designation, if available
+
+      - name: name
+        description: Committee name
+
+      # - name: address1
+      #   description: Primary address line
+
+      # - name: address2
+      #   description: Secondary address line
+
+      # - name: city
+      #   description: City of the candidate or committee
+
+      # - name: state
+      #   description: State or region
+
+      # - name: zip_code
+      #   description: ZIP code
+
+      - name: affiliation
+        description: Political affiliation/party
+
+      - name: district
+        description: District, if known
+
+      # - name: insert_datetime
+      #   description: Timestamp of record insertion in UTC
+
+  - name: candidate_master
+    description: >
+      Transformed candidate data from all states mapped into the unified master schema.
+      Each row represents a candidate with normalized structure and unique identifiers.
+    columns:
+      - name: source
+        description: Static source identifier (state or FEC)
+        tests:
+          - accepted_values:
+              values: [
+                      "FL", "FEC", "SD", "AL", "AK", "NJ", "MI", "SC", "AZ", "AR",
+                      "CT", "IA", "KS", "KY", "MT", "NE", "NH", "NM", "OK", "TN",
+                      "TX", "WA", "WV", "WI", "DE", "IL", "MD", "CA", "CO", "GA",
+                      "DC", "HI", "IN", "MA", "MN", "MO", "LA", "NY", "MS", "ID",
+                      "ND", "OH", "ME", "VT", "NV", "NC", "OR", "PA", "VA", "UT",
+                      "WY", "RI" , "OH"
+                    ]
+
+      - name: candidate_id
+        description: Generated unique ID for the committee using candidate name, year, and address
+        tests:
+          - not_null
+          - unique
+
+      - name: name
+        description: Candidate name
+
+      - name: insert_datetime
+        description: Timestamp of record insertion in UTC
+

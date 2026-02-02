@@ -1,0 +1,885 @@
+version: 2
+
+sources:
+  - name: fec
+    schema: public
+    description: FEC raw data tables
+    tables:
+      - name: federal_committee_master_landing
+        meta:
+          dagster:
+            asset_key: ['fec_committee_master_insert_to_landing_table']
+      - name: federal_schedule_a_landing
+        meta:
+          dagster:
+            asset_key: ['fec_daily_schedule_a_insert_to_landing_table']
+      - name: federal_candidate_master_landing
+        meta:
+          dagster:
+            asset_key: ['fec_candidate_master_insert_to_landing_table']
+
+  - name: al
+    schema: public
+    description: Alabama State Raw Data tables
+    tables:
+
+      - name: al_cash_contributions
+        description: "Raw cash contributions data from Alabama"
+        meta:
+          dagster:
+            asset_key: ['al_insert_cash_contributions_to_landing_table']
+
+      - name: al_in_kind_contributions
+        description: |
+          Raw in-kind contributions from Alabama campaign finance disclosures.
+          Contains information about contributors, committees, contribution amounts, and 
+          details about the nature of the in-kind support.
+        meta:
+          dagster:
+            asset_key: ['al_insert_in_kind_contributions_to_landing_table']
+
+      - name: al_other_receipts
+        description: "Raw other receipts from Alabama"
+        meta:
+          dagster:
+            asset_key: ['al_insert_other_receipts_to_landing_table']
+
+      - name: al_candidates_landing
+        description: Raw Alabama campaign committee registration data
+        meta:
+          dagster:
+            asset_key: ['al_insert_candidates_to_landing_table']
+
+      - name: al_political_action_committee_landing
+        description: Raw Alabama Political Action Committee (PAC) registration data
+        meta:
+          dagster:
+            asset_key: ['al_insert_political_action_committee_to_landing_table']
+
+
+  - name: ak
+    schema: public
+    description: Alaska State Raw Data Tables
+    tables:
+      - name: ak_contribution_reports_landing
+        description: |
+            Raw contribution report data scraped from Alaska APOC site.
+            https://aws.state.ak.us/apocreports/StatementContributions/SCForms.aspx
+        meta:
+            dagster:
+              asset_key: ['ak_inserting_contribution_reports_data']
+
+
+      - name: ak_all_candidates_landing
+        description: |
+            Raw contribution report data scraped from Alaska APOC site.
+            https://aws.state.ak.us/apocreports/campaign/AllCandidates.aspx?type=all
+        meta:
+            dagster:
+              asset_key: ['ak_inserting_all_candidates_data']
+
+  - name: ar
+    schema: public
+    description: Arkansas State Raw Data Tables
+    tables: 
+      - name: ar_commitees_landing
+        meta:
+          dagster:
+            asset_key: ['ar_commitees_insert_data_to_landing_table']
+
+      - name: ar_candidates_landing
+        meta:
+          dagster:
+            asset_key: ['ar_candidates_insert_data_to_landing_table']
+
+      - name: ar_contributions_landing
+        meta:
+          dagster:
+            asset_key: ['ar_contributions_insert_data_to_landing_table']
+
+  - name: de
+    schema: public
+    description: Delaware State Raw Data Tables
+    tables: 
+      - name: de_contributions_landing
+        meta:
+          dagster:
+            asset_key: ['de_insert_contributions_to_landing_table']
+
+      - name: de_committees_landing
+        meta:
+          dagster:
+            asset_key: ['de_insert_committees_to_landing_table']
+
+      - name: de_candidates_landing
+        meta:
+          dagster:
+            asset_key: ['de_insert_candidates_to_landing_table']
+
+  - name: mt
+    schema: public
+    description: Montana State Raw Data Tables
+    tables: 
+      - name: mt_candidates_landing
+        meta:
+          dagster:
+            asset_key: ['mt_inserting_candidates_reports_data']
+      - name: mt_committees_landing
+        meta:
+          dagster:
+            asset_key: ['mt_inserting_committees_reports_data']
+    
+      - name: mt_contributions_candidates_details_landing
+        meta:
+          dagster:
+            asset_key: ['mt_inserting_contribution_candidates_details_reports_data']
+
+      - name: mt_contributions_committees_details_landing
+        meta:
+          dagster:
+            asset_key: ['mt_inserting_contribution_committees_details_reports_data']
+ 
+  - name: wv
+    schema: public
+    description: West Virginia State Raw Data Tables
+    tables: 
+      - name: wv_contributions_landing
+        meta:
+          dagster:
+            asset_key: ['wv_insert_raw_contributions_to_landing_table']
+
+      - name: wv_committees_landing
+        meta:
+          dagster:
+            asset_key: ['wv_insert_committees_to_landing_table']
+
+      - name: wv_candidates_landing
+        meta:
+          dagster:
+            asset_key: ['wv_insert_candidates_to_landing_table']
+
+  - name: ca
+    schema: public
+    description: California State Raw Data Tables
+    tables:
+      - name: ca_cvr_campaign_disclosure
+        meta:
+          dagster:
+            asset_key: ['ca_cvr_campaign_disclosure_insert_to_landing_table']
+      - name: ca_rcpt
+        meta:
+          dagster:
+            asset_key: ['ca_rcpt_insert_to_landing_table']
+
+      - name: ca_s497
+        meta:
+          dagster:
+            asset_key: ['ca_s497_insert_to_landing_table']
+
+  - name: nm
+    schema: public
+    description: New Mehico State Raw Data Tables
+    tables:
+      - name: nm_contributions_landing
+        meta:
+          dagster:
+            asset_key: ['nm_insert_raw_contributions_to_landing_table']
+
+
+  - name: ny
+    schema: public
+    description: New York State Raw Data Tables
+    tables:
+      - name: ny_filer_data_landing
+        meta:
+          dagster:
+            asset_key: ['ny_insert_filer_data_to_landing_table']
+      - name: ny_state_candidate_landing
+        meta:
+          dagster:
+            asset_key: ['ny_insert_all_time_state_candidate_to_landing_table']
+      - name: ny_county_candidate_landing
+        meta:
+          dagster:
+            asset_key: ['ny_insert_all_time_county_candidate_to_landing_table']
+      - name: ny_state_committee_landing
+        meta:
+          dagster:
+            asset_key: ['ny_insert_all_time_state_committee_to_landing_table']
+      - name: ny_county_committee_landing
+        meta:
+          dagster:
+            asset_key: ['ny_insert_all_time_county_committee_to_landing_table']
+
+  - name: ma
+    schema: public
+    description: Massachussets State Raw Data Tables
+    tables:
+      - name: ma_contributions_landing
+        meta:
+          dagster:
+            asset_key: ['ma_insert_contributions_to_landing']
+
+      - name: ma_committee_candidate_landing_table
+        meta:
+          dagster:
+            asset_key: ['ma_insert_committee_table_to_landing']
+
+  - name: ms
+    schema: public
+    description: Mississippi State Raw Data Tables
+    tables:
+      - name: ms_candidate_committee_landing
+        meta:
+          dagster:
+            asset_key: ['ms_insert_contributions']
+      - name: ms_contributions_landing
+        meta:
+          dagster:
+            asset_key: ['ms_insert_candidate_committee']
+
+  - name: la
+    schema: public
+    description: Louisiana State Raw Data Tables
+    tables:
+      - name: la_candidates_landing
+        meta:
+          dagster:
+            asset_key: ['la_inserting_candidates_data']
+      - name: la_contributions_landing
+        meta:
+          dagster:
+            asset_key: ['la_inserting_contributions_data']
+
+  - name: nj
+    schema: public
+    description: New Jersey State Raw Data Tables
+    tables:
+      - name: nj_contributions_landing
+        meta:
+          dagster:
+            asset_key: ['nj_contributions_insert_to_landing_table']
+
+      - name: nj_candidates_landing
+        meta:
+          dagster:
+            asset_key: ['nj_candidates_insert_to_landing_table']
+
+  - name: fl
+    schema: public
+    description: Florida State Raw Data Tables
+    tables:
+      - name: fl_contributions_landing
+        meta:
+          dagster:
+            asset_key: ['fl_insert_contributions']
+
+  - name: mi
+    schema: public
+    description: Michigan State Raw Data Tables
+    tables:
+      - name: mi_contributions_landing
+        meta:
+          dagster:
+            asset_key: ['mi_insert_legacy_contributions_to_landing_table']
+      - name: mi_mitn_contributions_landing
+        meta:
+          dagster:
+            asset_key: ['mi_insert_contributions']
+
+
+  - name: nd
+    schema: public
+    description: North Dakota Raw Data Tables
+    tables:
+      - name: nd_committees_landing
+        meta:
+          dagster:
+            asset_key: ['nd_inserting_committees_data']
+
+      - name: nd_contributions_landing
+        meta:
+          dagster:
+            asset_key: ['nd_inserting_contributions_data']
+
+  - name: ct
+    schema: public
+    description: Connecticut Raw Data Tables
+    tables:
+      - name: ct_committees_landing
+        meta:
+          dagster:
+            asset_key: ['ct_inserting_committees_reports_data']
+
+      - name: ct_contributions_landing
+        meta:
+          dagster:
+            asset_key: ['ct_inserting_contributions_reports_data']
+
+  - name: ia
+    schema: public
+    description: Iowa Raw Data Tables
+    tables:
+      - name: ia_registered_political_candidates_landing
+        meta:
+          dagster:
+            asset_key: ['ia_registered_political_candidates_insert_data_to_landing_table']
+
+      - name: ia_campaign_contributions_received_landing
+        meta:
+          dagster:
+            asset_key: ['ia_campaign_contributions_received_insert_data_to_landing_table']
+  
+  - name: ky
+    schema: public
+    description: Kentucky Raw Data Tables
+    tables:
+      - name: ky_organizations_landing
+        meta:
+          dagster:
+            asset_key: ['ky_insert_organizations_reports_data']
+
+      - name: ky_contributions_landing
+        meta:
+          dagster:
+            asset_key: ['ky_insert_contributions_reports_data']
+
+      - name: ky_candidates_landing
+        meta:
+          dagster:
+            asset_key: ['ky_insert_candidates_reports_data']
+
+  - name: ne
+    schema: public
+    description: Nebraska Raw Data Tables
+    tables:
+      - name: ne_contributions_loan_landing
+        meta:
+          dagster:
+            asset_key: ['ne_insert_contributions_loans']
+
+  - name: sc
+    schema: public
+    description: South Carolina State Raw Data Tables
+    tables:
+      - name: sc_contributions_landing
+        meta:
+          dagster:
+            asset_key: ['sc_contributions_insert_to_landing_table']
+
+  - name: ks
+    schema: public
+    description: Kansas State Raw Data Tables
+    tables:
+      - name: ks_committees_landing
+        meta:
+          dagster:
+            asset_key: ['ks_insert_committees_to_landing_table']
+
+      - name: ks_contribution_landing
+        meta:
+          dagster:
+            asset_key: ['ks_insert_contribution_to_landing_table']
+
+  - name: tn
+    schema: public
+    description: Tennessee State Raw Data Tables
+    tables:
+      - name: tn_candidates_landing
+        meta:
+          dagster:
+            asset_key: ['tn_inserting_candidates_reports_data']
+      - name: tn_contributions_landing
+        meta:
+          dagster:
+            asset_key: ['tn_inserting_contributions_reports_data']
+
+  - name: tx
+    schema: public
+    description: Texas State Raw Data Tables
+    tables:
+      - name: tx_filers_landing
+        meta:
+          dagster:
+            asset_key: ['tx_filers_insert_to_landing_table']
+      - name: tx_spacs_landing
+        meta:
+          dagster:
+            asset_key: ['tx_spacs_insert_to_landing_table']
+
+      - name: tx_contribs_landing
+        meta:
+          dagster:
+            asset_key: ['tx_contribs_insert_to_landing_table']
+
+
+
+  - name: ok
+    schema: public
+    description: Oklahoma Raw Data Tables
+    tables:
+      - name: ok_contributions_loans_landing
+        meta:
+          dagster:
+            asset_key: ['ok_insert_contributions_loans']
+      - name: ok_committees_landing
+        meta:
+          dagster:
+            asset_key: ['ok_insert_committees']
+      - name: ok_expenditures_landing
+        meta:
+          dagster:
+            asset_key: ['ok_insert_expenditures']
+
+  - name: il
+    schema: public
+    description: Illinois State Raw Data Tables
+    tables:
+      - name: il_cmte_candidate_links_landing
+        meta:
+          dagster:
+            asset_key: ['il_CmteCandidateLinks_insert_to_landing_table']
+    
+      - name: il_candidates_landing
+        meta:
+          dagster:
+            asset_key: ['il_Candidates_insert_to_landing_table']
+      - name: il_committees_landing
+        meta:
+          dagster:
+            asset_key: ['il_Committees_insert_to_landing_table']
+      - name: il_receipts_landing
+        meta:
+          dagster:
+            asset_key: ['il_Receipts_insert_to_landing_table']
+
+  - name: wa
+    schema: public
+    description: Washington State Raw Data Tables
+    tables:
+      - name: wa_campaign_finance_summary_landing
+        meta:
+          dagster:
+            asset_key: ['wa_campaign_finance_summary_insert_to_landing_table']
+      - name: wa_contributions_to_candidates_and_political_committees_landing
+        meta:
+          dagster:
+            asset_key: ['wa_contributions_to_candidates_and_political_committees_insert_to_landing_table']
+
+  - name: md
+    schema: public
+    description: Maryland State Raw Data Tables
+    tables:
+      - name: md_contributions_and_loans_landing
+        meta:
+          dagster:
+            asset_key: ['md_insert_contributions_and_loans']
+
+  - name: wi
+    schema: public
+    description: Wisconsin State Raw Data Tables
+    tables:
+      - name: wi_receipt_transactions_landing
+        meta:
+          dagster:
+            asset_key: ['wi_receipt_transactions_insert_to_landing_table']
+      - name: wi_registered_committees_landing
+        meta:
+          dagster:
+            asset_key: ['wi_registered_committees_insert_to_landing_table']
+
+  - name: ri
+    schema: public
+    description: Rhode Island State Raw Data Tables
+    tables:
+      - name: ri_contributions_landing
+        meta:
+          dagster:
+            asset_key: ['ri_insert_contributions']
+
+  - name: dc
+    schema: public
+    description: District Of Columbia State Raw Data Tables
+    tables:
+      - name: dc_committees_landing_table
+        meta:
+          dagster:
+            asset_key: ['dc_insert_committees_to_landing']
+      - name: dc_financial_contributions_landing_table
+        meta:
+          dagster:
+            asset_key: ['dc_insert_financial_contrib_to_landing']
+  - name: co
+    schema: public
+    description: Colorado State Raw Data Tables
+    tables:
+      - name: co_contributions_landing
+        meta:
+          dagster:
+            asset_key: ['co_contributions_insert_to_landing_table']
+
+  - name: ga
+    schema: public
+    description: Georgia State Raw Data Tables
+    tables:
+      - name: ga_contributions_and_loans_landing
+        meta:
+          dagster:
+            asset_key: ['ga_contributions_and_loans_insert_to_landing_table']
+      - name: ga_expenditures_landing
+        meta:
+          dagster:
+            asset_key: ['ga_expenditures_insert_to_landing_table']
+
+  - name: me
+    schema: public
+    description: Maine State Raw Data Tables
+    tables:
+      - name: maine_old_contributions_and_loans_landing
+        meta:
+          dagster:
+            asset_key: ['me_insert_old_format_contributions_and_loans']
+      - name: maine_new_contributions_and_loans_landing
+        meta:
+          dagster:
+            asset_key: ['me_insert_new_format_contributions_and_loans']
+
+  - name: va
+    schema: public
+    description: Virginia State Raw Data Tables
+    tables:
+      - name: va_candidate_campaign_committee_landing
+        meta:
+          dagster:
+            asset_key: ['va_candidate_campaign_committee_insert_to_landing_table']
+      - name: va_inagural_committee_landing
+        meta:
+          dagster:
+            asset_key: ['va_inagural_committee_insert_to_landing_table']
+      - name: va_out_of_state_political_action_committee_landing
+        meta:
+          dagster:
+            asset_key: ['va_out_of_state_political_action_committee_insert_to_landing_table']
+      - name: va_political_action_committee_landing
+        meta:
+          dagster:
+            asset_key: ['va_political_action_committee_insert_to_landing_table']
+      - name: va_political_party_committee_landing
+        meta:
+          dagster:
+            asset_key: ['va_political_party_committee_insert_to_landing_table']
+      - name: va_referendum_committee_landing
+        meta:
+          dagster:
+            asset_key: ['va_referendum_committee_insert_to_landing_table']
+
+      - name: schedulea_pac_old_landing
+        meta:
+          dagster:
+            asset_key: ['va_schedule_a_pac_insert_to_landing_table']
+      - name: schedulea_pac_transitional_landing
+        meta:
+          dagster:
+            asset_key: ['va_transitional_schedule_a_pac_insert_to_landing_table']
+      - name: schedulea_new_landing
+        meta:
+          dagster:
+            asset_key: ['va_schedule_a_insert_to_landing_table']
+
+      - name: scheduleb_pac_old_landing
+        meta:
+          dagster:
+            asset_key: ['va_schedule_b_pac_insert_to_landing_table']
+      - name: scheduleb_old_landing
+        meta:
+          dagster:
+            asset_key: ['va_old_schedule_b_insert_to_landing_table']
+      - name: scheduleb_new_landing
+        meta:
+          dagster:
+            asset_key: ['va_schedule_b_insert_to_landing_table']
+      - name: report_landing
+        meta:
+          dagster:
+            asset_key: ['va_report_insert_to_landing_table']
+
+
+  - name: hi
+    schema: public
+    description: Hawaii State Raw Data Tables
+    tables:
+      - name: hi_contrib_recv_by_non_candidates_landing_table
+        meta:
+          dagster:
+            asset_key: ['hi_insert_contrib_recv_by_non_candidate_to_landing']
+
+  - name: az
+    schema: public
+    description: Arizona State Raw Data Tables
+    tables:
+      - name: az_committees_landing
+        meta:
+          dagster:
+            asset_key: ['az_committees_insert_to_landing_table']
+
+      - name: az_contributions_landing
+        meta:
+          dagster:
+            asset_key: ['az_insert_contributions_to_landing']
+
+  - name: pa
+    schema: public
+    description: Pennsylvania State Raw Data Tables
+    tables:
+      - name: pa_contrib_new_format_landing_table
+        meta:
+          dagster:
+            asset_key: ['pa_insert_new_format_contrib_to_landing']
+
+      - name: pennsylvania_old_contrib_landing
+        meta:
+          dagster:
+            asset_key: ['pa_insert_old_format_contrib_to_landing']
+
+      - name: pa_filer_new_format_landing_table
+        meta:
+          dagster:
+            asset_key: ['pa_insert_new_format_filer_to_landing']
+
+      - name: pennsylvania_old_filer_landing
+        meta:
+          dagster:
+            asset_key: ['pa_insert_old_format_filer_to_landing']
+
+  - name: or
+    schema: public
+    description: Oregon State Raw Data Tables
+    tables:
+      - name: or_transaction_landing
+        meta:
+          dagster:
+            asset_key: ['or_insert_contributions_to_landing']
+
+      - name: or_committees_landing
+        meta:
+          dagster:
+            asset_key: ['or_insert_commitees_to_landing']
+
+  - name: vt
+    schema: public
+    description: Vermount State Raw Data Tables
+    tables:
+      - name: vermont_contributions_landing
+        meta:
+          dagster:
+            asset_key: ['vt_insert_contributions_to_landing_table']
+
+      - name: vermont_expenditures_landing
+        meta:
+          dagster:
+            asset_key: ['vt_insert_expenditures_to_landing_table']
+
+      - name: vermont_committees_landing
+        meta:
+          dagster:
+            asset_key: ['vt_insert_committees_to_landing_table']
+
+      - name: vermont_candidates_landing
+        meta:
+          dagster:
+            asset_key: ['vt_insert_candidates_to_landing_table']
+
+  - name: wy
+    schema: public
+    description: Wyoming State Raw Data Tables
+    tables:
+      - name: wy_contributions_landing_table
+        meta:
+          dagster:
+            asset_key: ['wy_insert_contributions_to_landing']
+
+  - name: in
+    schema: public
+    description: Indiana State Raw Data Tables
+    tables:
+      - name: in_contribution_data_landing_table
+        meta:
+          dagster:
+            asset_key: ['in_insert_contribution_data_to_landing']
+      - name: in_expenditure_data_landing_table
+        meta:
+          dagster:
+            asset_key: ['in_insert_expenditure_data_to_landing']
+      - name: in_committee_data_landing_table
+        meta:
+          dagster:
+            asset_key: ['in_insert_committee_data_to_landing']
+            
+  - name: id
+    schema: public
+    description: Idaho State Raw Data Tables
+    tables:
+      - name: id_old_candidate_contributions_landing
+        meta:
+          dagster:
+            asset_key: ['id_insert_old_candidate_contributions_to_landing_table']
+      - name: id_old_committee_contributions_landing
+        meta:
+          dagster:
+            asset_key: ['id_insert_old_committee_contributions_to_landing_table']
+      - name: id_new_contributions_landing
+        meta:
+          dagster:
+            asset_key: ['id_insert_new_contributions_to_landing_table']
+
+  - name: nc
+    schema: public
+    description: North Carolina State Raw Data Tables
+    tables:
+      - name: nc_transactions_landing
+        meta:
+          dagster:
+            asset_key: ['nc_insert_transactions_to_landing']
+
+  - name: nv
+    schema: public
+    description: Nevada State Raw Data Tables
+    tables:
+      - name: nv_candidates_landing
+        meta:
+          dagster:
+            asset_key: ['nv_insert_candidates_to_landing_table']
+      - name: nv_groups_landing
+        meta:
+          dagster:
+            asset_key: ['nv_insert_groups_to_landing_table']
+      - name: nv_contributors_payees_landing
+        meta:
+          dagster:
+            asset_key: ['nv_insert_contributors_payees_to_landing_table']
+      - name: nv_contributions_landing
+        meta:
+          dagster:
+            asset_key: ['nv_insert_contribuions_to_landing_table']
+
+  - name: ut
+    schema: public
+    description: Utah State Raw Data Tables
+    tables:
+      - name: ut_finance_report_landing_table
+        meta:
+          dagster:
+            asset_key: ['ut_insert_report_data_to_landing']
+
+  - name: oh
+    schema: public
+    description: Ohio State Raw Data Tables
+    tables:
+      - name: oh_candidate_contribution_landing
+        meta:
+          dagster:
+            asset_key: ['oh_insert_candidate_contributions']
+
+      - name: oh_candidate_list_landing
+        meta:
+          dagster:
+            asset_key: ['oh_insert_candidate_lists']
+
+      - name: oh_committee_contribution_landing
+        meta:
+          dagster:
+            asset_key: ['oh_insert_committee_contributions']
+
+      - name: oh_committee_list_landing
+        meta:
+          dagster:
+            asset_key: ['oh_insert_committee_lists']
+
+  - name: mo
+    schema: public
+    description: Missouri State Raw Data Tables
+    tables:
+      - name: mo_cd1a_landing_table
+        meta:
+          dagster:
+            asset_key: ['mo_insert_cd1a_to_landing']
+      - name: mo_cd1b1_a_landing_table
+        meta:
+          dagster:
+            asset_key: ['mo_insert_cd1b1_a_to_landing']
+      - name: mo_cd1b2_a_landing_table
+        meta:
+          dagster:
+            asset_key: ['mo_insert_cd1b2_a_to_landing']
+      - name: mo_cd1_a_landing_table
+        meta:
+          dagster:
+            asset_key: ['mo_insert_cd1_a_to_landing']
+      - name: mo_cd1_b_landing_table
+        meta:
+          dagster:
+            asset_key: ['mo_insert_cd1_b_to_landing']
+      - name: mo_cd1_c_landing_table
+        meta:
+          dagster:
+            asset_key: ['mo_insert_cd1_c_to_landing']
+      - name: mo_cd3_a_landing_table
+        meta:
+          dagster:
+            asset_key: ['mo_insert_cd3_a_to_landing']
+      - name: mo_cd3_b_landing_table
+        meta:
+          dagster:
+            asset_key: ['mo_insert_cd3_b_to_landing']
+      - name: mo_cd3_c_landing_table
+        meta:
+          dagster:
+            asset_key: ['mo_insert_cd3_c_to_landing']
+      - name: mo_committee_data_landing_table
+        meta:
+          dagster:
+            asset_key: ['mo_insert_committee_data_to_landing']
+      - name: mo_summary_landing_table
+        meta:
+          dagster:
+            asset_key: ['mo_insert_summary_to_landing']
+
+  - name: nh
+    schema: public
+    description: New Hampshire State Raw Data Tables
+    tables:
+      - name: nh_new_receipts_landing
+        meta:
+          dagster:
+            asset_key: ['nh_insert_receipts']
+      - name: nh_candidate_landing
+        meta:
+          dagster:
+            asset_key: ['nh_insert_candidate']
+
+      - name: nh_candidate_committee_landing
+        meta:
+          dagster:
+            asset_key: ['nh_insert_candidate_committee']
+
+      - name: nh_political_committee_landing
+        meta:
+          dagster:
+            asset_key: ['nh_insert_political_committee']
+
+  - name: mn
+    schema: public
+    description: Minnesota State Raw Data Tables
+    tables:
+      - name: mn_contrib_landing_table
+        meta:
+          dagster:
+            asset_key: ['mn_insert_contrib_to_landing']
+      - name: mn_general_expenditures_landing_table
+        meta:
+          dagster:
+            asset_key: ['mn_insert_general_expenditures_to_landing']
+      - name: mn_independent_expenditures_landing_table
+        meta:
+          dagster:
+            asset_key: ['mn_insert_independent_expenditures_to_landing']

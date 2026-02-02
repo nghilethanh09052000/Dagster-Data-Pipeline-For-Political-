@@ -1,0 +1,40 @@
+-- Create NJ contributions landing table
+CREATE TABLE "nj_contributions_landing" (
+    "cont_lname" TEXT,
+    "cont_fname" TEXT,
+    "cont_mname" TEXT,
+    "cont_suffix" TEXT,
+    "cont_non_ind_name" TEXT,
+    "cont_non_ind_name2" TEXT,
+    "cont_street1" TEXT,
+    "cont_street2" TEXT,
+    "cont_city" TEXT,
+    "cont_state" TEXT,
+    "cont_zip" TEXT,
+    "cont_type" TEXT,
+    "cont_amt" TEXT,
+    "receipt_type" TEXT,
+    "cont_date" TEXT,
+    "occupation" TEXT,
+    "emp_name" TEXT,
+    "emp_street1" TEXT,
+    "emp_street2" TEXT,
+    "emp_city" TEXT,
+    "emp_state" TEXT,
+    "emp_zip" TEXT,
+    "rec_lname" TEXT,
+    "rec_fname" TEXT,
+    "rec_mname" TEXT,
+    "rec_suffix" TEXT,
+    "rec_non_ind_name" TEXT,
+    "rec_non_ind_name2" TEXT,
+    "office" TEXT,
+    "party" TEXT,
+    "location" TEXT,
+    "election_year" TEXT,
+    "election_type" TEXT,
+    "src_file" TEXT
+);
+
+-- Make the table unlogged for faster bulk loading
+ALTER TABLE "nj_contributions_landing" SET UNLOGGED;

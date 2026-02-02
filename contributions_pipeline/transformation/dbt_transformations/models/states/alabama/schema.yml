@@ -1,0 +1,144 @@
+version: 2
+
+models:
+  - name: alabama_individual_contributions_transform
+    description: |
+      This model transforms raw Alabama individual contributions data into a standardized format.
+    columns:
+      - name: source
+        description: Hardcoded source indicator for the state ('AL').
+        tests:
+          - accepted_values:
+              values: ['AL']
+
+      - name: source_id
+        description: ID for the contribution, prefixed with 'AL_'.
+        tests:
+          - not_null
+          - unique
+          - assert_has_prefix:
+              prefix: AL_
+
+      - name: committee_id
+        description: Unique ID for the committee, prefixed with 'AL_'.
+        tests:
+          - not_null
+          - assert_has_prefix:
+              prefix: AL_
+
+      - name: name
+        description: Contributor's full name, constructed from first and last name.
+        tests:
+          - not_null
+
+      - name: city
+        description: Contributor's city.
+
+      - name: state
+        description: Contributor's state.
+
+      - name: zip_code
+        description: Contributor's ZIP code.
+
+      - name: employer
+        description: Employer field (null for cash contributions).
+
+      - name: occupation
+        description: Occupation field (null for cash contributions).
+
+      - name: amount
+        description: Contribution amount cast to numeric.
+        tests:
+          - not_null
+
+      - name: contribution_datetime
+        description: Date and time of the contribution, cast to timestamp with time zone.
+        tests:
+          - not_null
+      - name: insert_datetime
+        description: Timestamp when the record was processed and inserted.
+        tests:
+          - not_null
+
+  - name: alabama_committee_master_transform
+    description: Master list of Alabama committees
+    columns:
+      - name: source
+        description: Hardcoded source indicator for the state ('AL').
+        tests:
+          - accepted_values:
+              values: ['AL']
+
+      - name: committee_id
+        description: Unique identifier for the committee
+        tests:
+          - not_null
+          - unique
+          - assert_has_prefix:
+              prefix: AL_
+
+      - name: committee_designation
+        description: Committee designation
+
+      - name: name
+        description: Committee name
+        tests:
+          - not_null
+
+      - name: address1
+        description: Primary address line
+
+      - name: address2
+        description: Secondary address line
+
+      - name: city
+        description: Committee city
+
+      - name: state
+        description: Committee state
+
+      - name: zip_code
+        description: Committee ZIP code
+
+      - name: affiliation
+        description: Political affiliation/party
+
+      - name: district
+        description: District of the election the committee is associated with
+
+      - name: insert_datetime
+        description: Timestamp of record insertion in UTC
+        tests:
+          - not_null
+
+  - name: alabama_candidate_master_transform
+    description: >
+      Transformed Alabam candidate data mapped into the unified candidate master schema.
+      Each row represents a candidate with normalized structure and a unique generated ID.
+    columns:
+      - name: source
+        description: Static source identifier, 'AL' for Alabam
+        tests:
+          - accepted_values:
+              values: ['AL']
+
+      - name: candidate_id
+        description: Generated unique ID for the candidate, prefixed with 'AL_'
+        tests:
+          - not_null
+          - unique
+          - assert_has_prefix:
+              prefix: AL_
+
+      - name: name
+        description: Candidate name
+        tests:
+          - not_null
+
+      - name: affiliation
+        description: Political affiliation/party
+
+      - name: insert_datetime
+        description: Timestamp of record insertion in UTC
+        tests:
+          - not_null  

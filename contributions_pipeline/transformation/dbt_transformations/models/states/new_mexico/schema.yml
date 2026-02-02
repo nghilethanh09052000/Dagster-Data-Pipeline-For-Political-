@@ -1,0 +1,167 @@
+version: 2
+
+models:
+  - name: new_mexico_individual_contributions_transform
+    description: >
+      Transformed individual contribution data from new_mexico campaign finance reports,
+    columns:
+      - name: source
+        description: Source system identifier, 'NM' for new_mexico
+        tests:
+          - accepted_values:
+              values: ['NM']
+
+      - name: source_id
+        description: Unique ID for the contribution, prefixed with 'NM_'
+        tests:
+          - not_null
+          - unique
+          - assert_has_prefix:
+              prefix: NM_
+
+
+      - name: committee_id
+        description: Committee ID generated from committee_name, prefixed with 'NM_'
+        tests:
+          - not_null
+          - assert_has_prefix:
+              prefix: NM_
+
+      - name: candidate_id
+        description: Candidate ID if applicable, prefixed with 'NM_'
+        tests:
+          - assert_has_prefix:
+              prefix: NM_
+
+      - name: candidate_name
+        description: Candidate name for reference (formatted consistently)
+
+      - name: name
+        description: Contributor name
+        tests:
+          - not_null
+
+      - name: city
+        description: Contributor city
+
+      - name: state
+        description: Contributor state
+
+      - name: zip_code
+        description: Contributor ZIP code
+
+      - name: employer
+        description: Contributor's employer
+
+      - name: occupation
+        description: Contributor's occupation
+
+      - name: amount
+        description: Contribution amount (numeric)
+        tests:
+          - not_null
+
+      - name: contribution_datetime
+        description: Timestamp when contribution was submitted
+        tests:
+          - not_null
+
+      - name: insert_datetime
+        description: When this record was inserted into the database
+        tests:
+          - not_null
+
+  - name: new_mexico_committee_master_transform
+    description: >
+      Transformed new_mexico committee data mapped into the unified committee master schema.
+      Each row represents a committee with normalized structure and a unique generated ID.
+    columns:
+      - name: source
+        description: Static source identifier, 'NM' for new_mexico
+        tests:
+          - accepted_values:
+              values: ['NM']
+
+      - name: committee_id
+        description: Generated unique ID for the committee, prefixed with 'NM_'
+        tests:
+          - not_null
+          - unique
+
+      - name: candidate_id
+        description: Candidate ID if the committee is associated with a specific candidate, prefixed with 'NM_'
+        tests:
+          - assert_has_prefix:
+              prefix: NM_
+
+      - name: candidate_name
+        description: Candidate name if the committee is associated with a specific candidate
+
+      - name: committee_designation
+        description: Committee designation (currently null)
+
+      - name: name
+        description: Committee name
+        tests:
+          - not_null
+
+      - name: address1
+        description: Primary address line
+
+      - name: address2
+        description: Secondary address line
+
+      - name: city
+        description: Committee city
+
+      - name: state
+        description: Committee state
+
+      - name: zip_code
+        description: Committee ZIP code
+
+      - name: affiliation
+        description: Political affiliation/party
+
+      - name: district
+        description: District of the election the committee is associated with
+
+      - name: insert_datetime
+        description: Timestamp of record insertion in UTC
+        tests:
+          - not_null
+
+  - name: new_mexico_candidate_master_transform
+    description: >
+      Transformed New Mexico candidate data mapped into the unified candidate master schema.
+      Each row represents a candidate with normalized structure and a unique generated ID.
+    columns:
+      - name: source
+        description: Static source identifier, 'NM' for New Mexico
+        tests:
+          - accepted_values:
+              values: ['NM']
+
+      - name: candidate_id
+        description: Generated unique ID for the candidate, prefixed with 'NM_'
+        tests:
+          - not_null
+          - unique
+          - assert_has_prefix:
+              prefix: NM_
+
+      - name: name
+        description: Candidate name
+        tests:
+          - not_null
+
+      - name: affiliation
+        description: Political affiliation/party
+
+      - name: district
+        description: District number or identifier
+
+      - name: insert_datetime
+        description: Timestamp of record insertion in UTC
+        tests:
+          - not_null

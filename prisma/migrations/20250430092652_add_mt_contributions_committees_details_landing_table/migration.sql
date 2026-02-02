@@ -1,0 +1,21 @@
+create table mt_contributions_committees_details_landing (
+    committee_id text,
+    committee_name text,
+    committee_type text,
+    election_year text,
+    transaction_id text,
+    transaction_date text,
+    transaction_amount text,
+    total_to_date text,
+    contributor_name text,
+    contributor_address text,
+    contributor_city text,
+    contributor_state text,
+    transaction_type text,
+    schedule text,
+    amount_type text,
+    description text,
+    purpose text,
+    occupation text,
+    employer text
+)

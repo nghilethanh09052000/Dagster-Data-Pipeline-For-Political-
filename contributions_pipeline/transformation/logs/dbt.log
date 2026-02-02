@@ -1,0 +1,31 @@
+[0m23:50:53.068446 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x110851bd0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x110875510>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x110875c50>]}
+
+
+============================== 23:50:53.070490 | fb2acf88-01d7-470f-b310-2e75404e7c87 ==============================
+[0m23:50:53.070490 [info ] [MainThread]: Running with dbt=1.9.4
+[0m23:50:53.070758 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'log_cache_events': 'False', 'write_json': 'True', 'partial_parse': 'True', 'cache_selected_only': 'False', 'warn_error': 'None', 'debug': 'False', 'version_check': 'True', 'log_path': 'logs', 'fail_fast': 'False', 'profiles_dir': '/Users/nghilethanh/.dbt', 'use_colors': 'True', 'use_experimental_parser': 'False', 'empty': 'None', 'quiet': 'False', 'no_print': 'None', 'log_format': 'default', 'invocation_command': 'dbt clean', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'static_parser': 'True', 'target_path': 'None', 'introspect': 'True', 'send_anonymous_usage_stats': 'True'}
+[0m23:50:53.071163 [error] [MainThread]: Encountered an error:
+Runtime Error
+  No dbt_project.yml found at expected path /Users/nghilethanh/Project/[UPWORK]-raisemore/pipeline/contributions_pipeline/transformation/dbt_project.yml
+  Verify that each entry within packages.yml (and their transitive dependencies) contains a file named dbt_project.yml
+  
+[0m23:50:53.072708 [debug] [MainThread]: Resource report: {"command_name": "clean", "command_success": false, "command_wall_clock_time": 0.032835875, "process_in_blocks": "0", "process_kernel_time": 0.112304, "process_mem_max_rss": "102809600", "process_out_blocks": "0", "process_user_time": 0.489017}
+[0m23:50:53.072931 [debug] [MainThread]: Command `dbt clean` failed at 23:50:53.072888 after 0.03 seconds
+[0m23:50:53.073096 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x110875f10>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x102342a50>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x102342a90>]}
+[0m23:50:53.073243 [debug] [MainThread]: Flushing usage events
+[0m23:50:54.195516 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m20:42:14.271963 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x119cfc210>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x119d299d0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x119cf6cd0>]}
+
+
+============================== 20:42:14.274258 | 63224a54-dc56-4248-afb2-6e0421642145 ==============================
+[0m20:42:14.274258 [info ] [MainThread]: Running with dbt=1.10.0-b2
+[0m20:42:14.274491 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'write_json': 'True', 'log_cache_events': 'False', 'partial_parse': 'True', 'cache_selected_only': 'False', 'profiles_dir': '/Users/nghilethanh/.dbt', 'debug': 'False', 'version_check': 'True', 'log_path': 'logs', 'fail_fast': 'False', 'warn_error': 'None', 'use_colors': 'True', 'use_experimental_parser': 'False', 'empty': 'None', 'quiet': 'False', 'no_print': 'None', 'log_format': 'default', 'static_parser': 'True', 'introspect': 'True', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'target_path': 'None', 'invocation_command': 'dbt deps', 'send_anonymous_usage_stats': 'True'}
+[0m20:42:14.274845 [error] [MainThread]: Encountered an error:
+Runtime Error
+  No dbt_project.yml found at expected path /Users/nghilethanh/Project/UPWORK-raisemore/pipeline/contributions_pipeline/transformation/dbt_project.yml
+  Verify that each entry within packages.yml (and their transitive dependencies) contains a file named dbt_project.yml
+  
+[0m20:42:14.276609 [debug] [MainThread]: Resource report: {"command_name": "deps", "command_success": false, "command_wall_clock_time": 0.031051625, "process_in_blocks": "0", "process_kernel_time": 0.096856, "process_mem_max_rss": "107266048", "process_out_blocks": "0", "process_user_time": 0.446595}
+[0m20:42:14.276765 [debug] [MainThread]: Command `dbt deps` failed at 20:42:14.276727 after 0.03 seconds
+[0m20:42:14.276913 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x119d2a150>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x119cf5f10>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10490b490>]}
+[0m20:42:14.277045 [debug] [MainThread]: Flushing usage events

@@ -1,0 +1,25 @@
+# Change this version to whatever Python verion
+# Standard Dagster+ just uses slim version of Python docker image
+# Ref: https://docs.dagster.io/dagster-plus/deployment/deployment-types/serverless/runtime-environment#use-a-different-base-image
+FROM python:3.10-bullseye
+
+# To update the deployment image (this could absolutely be automated)
+# Ref: https://docs.dagster.io/dagster-plus/deployment/deployment-types/serverless/runtime-environment#use-a-different-base-image
+#
+# 1. Build the image using Docker with a good name for it (e.g. "dagster-base")
+# 2. Upload the base image using `dagster-cloud serverless upload-base-image <the name you have gave> --deployment prod
+# 3. Change `SERVERLESS_BASE_IMAGE_TAG` value on `.github/workflows/deploy.yml` and `.github/workflows/branch-deployment.yml` 
+#    to the new one you've just received from running the dagster-cloud CLI
+
+# Required as an installed dependencies
+# https://docs.dagster.io/dagster-plus/deployment/deployment-types/serverless/runtime-environment#use-a-different-base-image
+RUN pip install "dagster-cloud[serverless]"
+
+# Installing chromium new headless mode with dependencies
+# Ref: https://playwright.dev/python/docs/browsers#chromium-new-headless-mode
+# WARN: match this with the locked version in pyproject.toml!
+RUN pip install playwright==1.54.0 && \
+  playwright install --with-deps --no-shell chromium && \
+  playwright install --with-deps --no-shell webkit
+
+CMD [ "python3" ]

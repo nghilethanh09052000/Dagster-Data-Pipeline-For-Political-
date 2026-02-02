@@ -1,0 +1,136 @@
+version: 2
+
+models:
+  - name: california_individual_contributions_transform
+    description: >
+      Transformed individual contribution data from California CAL-ACCESS campaign finance reports,
+      filtered from 'ca_rcpt'
+    columns:
+      - name: source
+        description: Source system identifier, 'CA' for California
+        tests:
+          - accepted_values:
+              values: ['CA']
+
+      - name: source_id
+        description: Unique ID for the contribution, prefixed with 'CA_'
+        tests:
+          - not_null
+          - unique
+          - assert_has_prefix:
+              prefix: CA_
+
+
+      - name: committee_id
+        description: Committee ID, prefixed with 'CA_'
+        tests:
+          - not_null
+          - assert_has_prefix:
+              prefix: CA_
+
+      - name: name
+        description: Contributor name
+        tests:
+          - not_null
+
+      - name: city
+        description: Contributor city
+
+      - name: state
+        description: Contributor state
+
+      - name: zip_code
+        description: Contributor ZIP code
+
+      - name: employer
+        description: Contributor's employer
+
+      - name: occupation
+        description: Contributor's occupation
+
+      - name: amount
+        description: Contribution amount (numeric)
+        tests:
+          - not_null
+
+      - name: contribution_datetime
+        description: Timestamp when contribution was submitted
+        tests:
+          - not_null
+
+      - name: insert_datetime
+        description: When this record was inserted into the database
+        tests:
+          - not_null
+
+  - name: california_committee_master_transform
+    description: >
+      Transformed California committee data mapped into the unified committee master schema.
+    columns:
+      - name: source
+        description: Static source identifier, 'CA' for California
+        tests:
+          - accepted_values:
+              values: ['CA']
+
+      - name: committee_id
+        description: Prefixed filer_id from cover data
+        tests:
+          - not_null
+          - unique
+
+      - name: committee_designation
+        description: Committee designation
+
+      - name: name
+        description: Committee name
+        tests:
+          - not_null
+
+      - name: address1
+        description: Primary address line
+
+      - name: address2
+        description: Secondary address line
+
+      - name: city
+        description: Committee city
+
+      - name: state
+        description: Committee state
+
+      - name: zip_code
+        description: Committee ZIP code
+
+      - name: affiliation
+        description: Political affiliation/party
+
+      - name: district
+        description: District of the election the committee is associated with
+
+      - name: insert_datetime
+        description: Timestamp of record insertion in UTC
+        tests:
+          - not_null
+
+  - name: california_candidate_master_transform
+    description: >
+      Transformed candidate data to follow the candidate master table schema
+    columns:
+      - name: source
+        tests:
+          - accepted_values:
+              values: ['CA']
+
+      - name: candidate_id
+        description: Generated unique ID for the committee using candidate name, year, and address
+        tests:
+          - not_null
+          - unique
+
+      - name: name
+        description: Candidate name
+
+      - name: insert_datetime
+        description: Timestamp of record insertion in UTC
+

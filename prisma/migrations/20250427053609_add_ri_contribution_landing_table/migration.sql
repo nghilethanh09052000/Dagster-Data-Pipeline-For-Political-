@@ -1,0 +1,25 @@
+
+CREATE TABLE ri_contributions_landing (
+    "ContributionID" TEXT,
+    "ContDesc" TEXT,
+    "IncompleteDesc" TEXT,
+    "OrganizationName" TEXT,
+    "ViewIncomplete" TEXT,
+    "ReceiptDate" TEXT,
+    "DepositDate" TEXT,
+    "Amount" TEXT,
+    "ContribExplanation" TEXT,
+    "MPFMatchAmount" TEXT,
+    "FirstName" TEXT,
+    "LastName" TEXT,
+    "FullName" TEXT,
+    "Address" TEXT,
+    "CityStZip" TEXT,
+    "EmployerName" TEXT,
+    "EmpAddress" TEXT,
+    "EmpCityStZip" TEXT,
+    "ReceiptDesc" TEXT,
+    "BeginDate" TEXT,
+    "EndDate" TEXT,
+    "TransType" TEXT
+);

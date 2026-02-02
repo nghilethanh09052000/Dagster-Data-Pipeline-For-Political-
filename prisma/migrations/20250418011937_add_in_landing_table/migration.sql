@@ -1,0 +1,40 @@
+CREATE TABLE in_contribution_data_landing_table (
+    "FileNumber" text,
+    "CommitteeType" text,
+    "Committee" text,
+    "CandidateName" text,
+    "ContributorType" text,
+    "Name" text,
+    "Address" text,
+    "City" text,
+    "State" text,
+    "Zip" text,
+    "Occupation" text,
+    "Type" text,
+    "Description" text,
+    "Amount" text,
+    "ContributionDate" text,
+    "Received_By" text,
+    "Amended" text
+);
+
+CREATE TABLE in_expenditure_data_landing_table (
+    "FileNumber" text,
+    "CommitteeType" text,
+    "Committee" text,
+    "CandidateName" text,
+    "ExpenditureCode" text,
+    "Name" text,
+    "Address" text,
+    "City" text,
+    "State" text,
+    "Zip" text,
+    "Occupation" text,
+    "OfficeSought" text,
+    "ExpenditureType" text,
+    "Description" text,
+    "Purpose" text,
+    "Amount" text,
+    "Expenditure_Date" text,
+    "Amended" text
+);

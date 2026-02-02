@@ -1,0 +1,182 @@
+version: 2
+
+models:
+  - name: montana_candidate_master_transform
+    description: >
+      Transforms Montana candidate data from the landing table into the master candidate schema.
+      Maps fields from mt_candidates_landing to match the standardized candidate master schema.
+      Follows the Delaware pattern with only essential columns that Montana can provide.
+    columns:
+      - name: source
+        description: The source of the data (montana)
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['MT']
+
+      - name: candidate_id
+        description: The candidate's unique identifier from Montana, prefixed with 'MT_'
+        tests:
+          - not_null
+          - assert_has_prefix:
+              prefix: MT_
+
+      - name: name
+        description: The candidate's full name
+        tests:
+          - not_null
+
+      - name: affiliation
+        description: The candidate's political party affiliation
+
+      - name: address
+        description: The candidate's address
+
+      - name: office_sought
+        description: The office the candidate is running for
+
+      - name: district
+        description: The candidate's county (using res_county_descr as Montana doesn't have traditional districts)
+
+      - name: status
+        description: The candidate's current status
+
+      - name: registration_date
+        description: When the candidate registered
+
+      - name: phone_number
+        description: The candidate's phone number
+
+      - name: insert_datetime
+        description: When this record was inserted
+        tests:
+          - not_null
+
+  - name: montana_committee_master_transform
+    description: >
+      Transforms Montana committee data from the landing table into the master committee schema.
+      Maps fields from mt_committees_landing to match the standardized committee master schema.
+    columns:
+      - name: source
+        description: The source of the data (montana)
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['MT']
+
+      - name: committee_id
+        description: The committee's unique identifier from Montana
+        tests:
+          - not_null
+          - assert_has_prefix:
+              prefix: MT_
+
+      - name: committee_designation
+        description: Committee designation (currently null as Montana doesn't provide this information)
+
+      - name: name
+        description: The committee's name
+        tests:
+          - not_null
+
+      - name: address1
+        description: The committee's primary address
+        tests:
+          - not_null
+
+      - name: address2
+        description: The committee's secondary address (mailing address)
+
+      - name: city
+        description: The committee's city
+        tests:
+          - not_null
+
+      - name: state
+        description: The committee's state
+        tests:
+          - not_null
+
+      - name: zip_code
+        description: The committee's zip code (using zip5)
+        tests:
+          - not_null
+
+      - name: affiliation
+        description: The committee's type/affiliation (using committee_type_descr)
+
+      - name: district
+        description: The committee's county (using county_descr as Montana doesn't have district info)
+
+      - name: insert_datetime
+        description: When this record was inserted (using created_date)
+        tests:
+          - not_null
+
+  - name: montana_individual_contributions_transform
+    description: >
+      Transformed individual contribution data from Montana campaign finance reports,
+      combining data from both mt_contributions_committees_details_landing and mt_contributions_candidates_details_landing.
+      Follows the Delaware pattern with clean, simple column selection.
+    columns:
+      - name: source
+        description: Source system identifier, 'MT' for Montana
+        tests:
+          - accepted_values:
+              values: ['MT']
+              
+
+      - name: source_id
+        description: Unique ID for the contribution, prefixed with 'MT_'
+        tests:
+          - unique
+          - not_null
+          - assert_has_prefix:
+              prefix: MT_
+
+      - name: committee_id
+        description: Committee ID, prefixed with 'MT_' (null for candidate-based contributions)
+        tests:
+          - assert_has_prefix:
+              prefix: MT_
+
+      - name: candidate_id
+        description: Candidate ID, prefixed with 'MT_' (null for committee-based contributions)
+        tests:
+        - assert_has_prefix:
+              prefix: MT_
+
+      - name: name
+        description: Contributor name
+        tests:
+          - not_null
+
+      - name: city
+        description: Contributor city
+
+      - name: state
+        description: Contributor state
+
+      - name: zip_code
+        description: Contributor ZIP code
+
+      - name: occupation
+        description: Contributor's occupation
+
+      - name: employer
+        description: Contributor's employer
+
+      - name: amount
+        description: Contribution amount (numeric)
+        tests:
+          - not_null
+
+      - name: contribution_datetime
+        description: Timestamp when contribution was submitted
+        tests:
+          - not_null
+
+      - name: insert_datetime
+        description: When this record was inserted into the database
+        tests:
+          - not_null

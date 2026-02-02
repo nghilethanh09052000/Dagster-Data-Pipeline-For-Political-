@@ -1,0 +1,140 @@
+version: 2
+
+models:
+  - name: ohio_committee_master_transform
+    description: >
+      Master committee data derived from Ohio campaign finance patterns and organization information.
+      Each row represents a unique committee with merged data from committee lists and contributions.
+    columns:
+      - name: source
+        description: Static source identifier 'OH'
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['OH']
+
+      - name: committee_id
+        description: Committee ID prefixed with 'OH_' generated from committee name
+        tests:
+          - not_null
+          - unique
+          - assert_has_prefix:
+              prefix: 'OH_'
+              
+      - name: committee_designation
+        description: Committee designation
+        
+      - name: name
+        description: Committee name from merged list and contribution data
+        tests:
+          - not_null
+
+      - name: address1
+        description: Merged primary address from committee list or contributor data
+
+      - name: address2
+        description: Explicitly empty column (not in Ohio source data)
+
+      - name: city
+        description: Merged city from committee list or contributor data
+
+      - name: state
+        description: Merged state abbreviation from committee list or contributor data
+
+      - name: zip_code
+        description: Merged ZIP code validated from committee list or contributor data
+
+      - name: affiliation
+        description: Merged sponsor/non-individual classification
+
+      - name: district
+        description: Placeholder for district mapping (requires external data)
+
+      - name: insert_datetime
+        description: Timestamp of record creation
+        tests:
+          - not_null
+
+  - name: ohio_individual_contributions_transform
+    description: >
+      Transformed contribution data from Ohio campaign finance reports,
+      combining candidate contributions and committee data with cleaned employer/occupation information.
+    columns:
+      - name: source
+        description: Source system identifier, always 'OH' for Ohio
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['OH']
+
+      - name: source_id
+        description: Unique surrogate key generated from committee_name + full_name + amount hash
+        tests:
+          - not_null
+          - unique
+          - assert_has_prefix:
+              prefix: 'OH_'
+
+      - name: committee_id
+        description: Committee ID prefixed with 'OH_' generated from committee name
+        tests:
+          - not_null
+          - assert_has_prefix:
+              prefix: 'OH_'
+
+      - name: name
+        description: Full name of contributor from candidate first/last names
+        tests:
+          - not_null
+
+      - name: city
+        description: Contributor city from contribution or committee data
+
+      - name: state
+        description: Contributor state abbreviation from contribution or committee data
+
+      - name: zip_code
+        description: Contributor ZIP code validated and cleaned to 5 digits
+
+      - name: employer
+        description: Employer name parsed from EMP_OCCUPATION field
+
+      - name: occupation
+        description: Occupation parsed from EMP_OCCUPATION field
+
+      - name: amount
+        description: Contribution amount in USD after validation
+        tests:
+          - not_null
+
+      - name: contribution_datetime
+        description: Timestamp parsed from FILE_DATE or EVENT_DATE fields
+        tests:
+          - not_null
+
+      - name: insert_datetime
+        description: Audit timestamp when record was loaded
+        tests:
+          - not_null
+
+  - name: ohio_candidate_master_transform
+    description: >
+      Transformed candidate data to follow the candidate master table schema
+    columns:
+      - name: source
+        tests:
+          - accepted_values:
+              values: ['OH']
+
+      - name: candidate_id
+        description: Generated unique ID for the committee using candidate name, year, and address
+        tests:
+          - not_null
+          - unique
+
+      - name: name
+        description: Candidate name
+
+      - name: insert_datetime
+        description: Timestamp of record insertion in UTC
+

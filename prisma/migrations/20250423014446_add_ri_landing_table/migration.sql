@@ -1,0 +1,23 @@
+CREATE TABLE IF NOT EXISTS ri_expenditures_landing (
+    "OrganizationName" TEXT,
+    "ExpenditureID" TEXT,
+    "DisbDesc" TEXT,
+    "ExpDesc" TEXT,
+    "ExpPmtDesc" TEXT,
+    "IncompleteDesc" TEXT,
+    "ViewIncomplete" TEXT,
+    "ExpDate" TEXT,        
+    "PmtDate" TEXT,       
+    "Amount" TEXT,
+    "FullName" TEXT,
+    "Address" TEXT,
+    "CityStZip" TEXT,
+    "ReceiptDesc" TEXT,
+    "ExpenditureCodeID" TEXT,
+    "BeginDate" TEXT,      
+    "EndDate" TEXT,        
+    "MPFUsed" TEXT,    
+    "OSAP" TEXT,  
+    "ZeroedByCF7" TEXT,    
+    "RICF7FilingId" TEXT   
+);

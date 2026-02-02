@@ -1,0 +1,7 @@
+state,fname,lname,zip,amount,date,source_url,notes
+CA,John,Smith,90210,250,2024-03-15,https://campaignfinance.cdn.sos.ca.gov/,Verified
+CA,Jane,Doe,90211,500,2024-02-20,https://campaignfinance.cdn.sos.ca.gov/,
+TX,Robert,Johnson,77001,1000,2023-11-10,https://www.ethics.state.tx.us/,
+NY,Mary,Williams,10001,750,2024-01-05,https://www.elections.ny.gov/,
+
+

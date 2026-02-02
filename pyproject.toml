@@ -1,0 +1,89 @@
+[project]
+name = "pipeline"
+version = "0.1.0"
+description = "Data processing pipeline for Raise More"
+requires-python = ">=3.10"
+dependencies = [
+  "dagster>=1.10.2",
+  "dagster-cloud>=1.10.2",
+  "dagster-webserver>=1.10.2",
+  "psycopg",
+  "psycopg-binary>=3.2.5",
+  "psycopg-pool",
+  "pytest>=8.3.4",
+  "requests[socks]>=2.23.3",
+  "fake-useragent>=2.0.3",
+  "beautifulsoup4>=4.13.3",
+  "dagster-slack>=0.26.6",
+  "selenium>=4.30.0",
+  "dbt-core>=1.9.4",
+  "dbt-postgres>=1.9.0",
+  "dagster-dbt>=0.26.7",
+  "croniter>=2.0.3",
+  "webdriver-manager>=4.0.2",
+  # Always make sure to lock down the version!
+  # And match it with Dockerfile.dagster-base as well!
+  # Otherwise playwright won't work properly!
+  "playwright==1.54.0",
+  "py7zr>=0.22.0",
+  "xlrd>=2.0.1",
+  "openpyxl>=3.1.5",
+  "tqdm>=4.67.1",
+  "truststore>=0.10.1",
+  "fecfile>=0.9.1",
+  "aiohttp>=3.12.12",
+  "aiodns>=3.4.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "ruff>=0.3.0",
+  "pyright>=1.1.344",
+  "responses>=0.25.6",
+  "types-xlrd>=2.0.0",
+  "ty>=0.0.1a13",
+  "types-requests>=2.32.4.20250611",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["."]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 88
+exclude = [".git", ".venv", "__pycache__", "build", "dist", ".claude"]
+
+[tool.ruff.lint]
+select = ["E", "F", "B", "I", "W", "C4", "UP", "N", "SIM", "PT", "RUF"]
+ignore = []
+
+[tool.ruff.lint.isort]
+known-first-party = ["."]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+
+[tool.pyright]
+include = ["."]
+exclude = ["**/__pycache__", "**/.venv", "**/venv"]
+reportMissingImports = true
+reportMissingTypeStubs = false
+pythonVersion = "3.10"
+pythonPlatform = "Darwin"
+typeCheckingMode = "basic"
+
+[tool.dagster]
+module_name = "contributions_pipeline.definitions"
+
+[tool.pytest.ini_options]
+testpaths = [".", "contributions_pipeline"]
+
+[dependency-groups]
+dev = ["responses>=0.25.6", "ty>=0.0.1a13"]

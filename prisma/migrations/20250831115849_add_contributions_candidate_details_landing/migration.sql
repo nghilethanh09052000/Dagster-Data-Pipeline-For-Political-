@@ -1,0 +1,22 @@
+CREATE TABLE mt_contributions_candidates_details_landing (
+    candidate_id TEXT,
+    candidate_name TEXT,
+    office_title TEXT,
+    party_descr TEXT,
+    election_year TEXT,
+    transaction_id TEXT,
+    transaction_date TEXT,
+    transaction_amount TEXT,
+    total_to_date TEXT,
+    contributor_name TEXT,
+    contributor_address TEXT,
+    contributor_city TEXT,
+    contributor_state TEXT,
+    transaction_type TEXT,
+    schedule TEXT,
+    amount_type TEXT,
+    description TEXT,
+    purpose TEXT,
+    occupation TEXT,
+    employer TEXT
+);

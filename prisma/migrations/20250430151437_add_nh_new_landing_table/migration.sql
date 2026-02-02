@@ -1,0 +1,40 @@
+CREATE TABLE nh_new_expenditures_landing (
+    "FilingEntityID" text,
+    "FilingEntityName" text,
+    "FilingEntityType" text,
+    "TransactionType" text,
+    "TransactionSubType" text,
+    "PayeeOrWorkerOrCreditorOrLoansourcetype" text,
+    "PayeeOrWorkerOrCreditorOrLoanSourceName" text,
+    "PayeeOrWorkerOrCreditorOrLoansourceAddress" text,
+    "TransactionAmount" text,
+    "TransactionDate" text,
+    "ElectionType" text,
+    "TransactionDescription" text,
+    "TimedReport" text
+);
+
+CREATE TABLE nh_new_receipts_landing (
+    "FilingEntityID" text,
+    "CandidateName" text,
+    "CommitteeName" text,
+    "CommitteeSubtype" text,
+    "TransactionType" text,
+    "TransactionSubType" text,
+    "ElectionPeriod" text,
+    "Electionyear" text,
+    "DateofReceipt" text,
+    "Amountofreceipt" text,
+    "ContributorType" text,
+    "ContributorName" text,
+    "ContributorAddressLine1" text,
+    "ContributorAddressLine2" text,
+    "ContributorCity" text,
+    "ContributorState" text,
+    "ContributorZipCode" text,
+    "Contributoroccupation" text,
+    "ContributorEmployer" text,
+    "ContributorPrincipleplaceofBusiness" text,
+    "Description" text,
+    "TimedReport" text
+);

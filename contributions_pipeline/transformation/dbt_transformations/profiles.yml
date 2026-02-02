@@ -1,0 +1,23 @@
+dbt_transformations:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: localhost
+      port: 5433
+      dbname: postgres
+      schema: public
+      user: postgres
+      pass: postgres
+      threads: 1
+    prod:
+      type: postgres
+      host: "{{ env_var('DBT_ENV_SECRET_HOST') }}"
+      port: "{{ env_var('DBT_PORT') | as_number }}"
+      dbname: "{{ env_var('DBT_ENV_SECRET_DBNAME') }}"
+      schema: "{{ env_var('DBT_ENV_SECRET_SCHEMA') }}"
+      user: "{{ env_var('DBT_ENV_SECRET_USER') }}"
+      pass: "{{ env_var('DBT_ENV_SECRET_PASS') }}"
+      threads:  "{{ env_var('DBT_THREADS', '3') | as_number }}"
+      keepalives_idle: "{{ env_var('DBT_KEEPALIVE_IDLE', '120') | as_number }}"
+

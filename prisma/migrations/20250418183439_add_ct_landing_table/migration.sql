@@ -1,0 +1,48 @@
+CREATE TABLE ct_committees_landing (
+    "committee_name" text,
+    "candidate_chairperson" text,
+    "treasurer" text,
+    "deputy_treasurer" text,
+    "office_sought" text,
+    "committee_type" text,
+    "termination_date" text,
+    "first_registration_date" text,
+    "party_designation" text,
+    "district" text,
+    "city" text,
+    "state" text
+);
+
+
+CREATE TABLE ct_contributions_landing (
+    "root_contrib_id" text,
+    "root_cef_grant_id" text,
+    "receipt_id" text,
+    "committee_name" text,
+    "received_from" text,
+    "city" text,
+    "state" text,
+    "district" text,
+    "office_sought" text,
+    "employer" text,
+    "receipt_type" text,
+    "committee_type" text,
+    "transaction_date" text,
+    "file_to_state_date" text,
+    "amount" text,
+    "receipt_status" text,
+    "occupation" text,
+    "election_year" text,
+    "is_contractor_executive_branch" text,
+    "is_contractor_legislative_branch" text,
+    "is_contractor" text,
+    "is_lobbyist_or_rel" text,
+    "data_source" text,
+    "refile" text,
+    "root_anonymous_id" text,
+    "root_loan_received_id" text,
+    "root_reimbursement_id" text,
+    "root_non_money_org_expend_id" text,
+    "committee_party_affiliation" text,
+    "method_of_payment" text
+); 

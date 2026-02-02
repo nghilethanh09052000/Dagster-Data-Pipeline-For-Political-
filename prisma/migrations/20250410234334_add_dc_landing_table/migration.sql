@@ -1,0 +1,40 @@
+CREATE TABLE dc_financial_contributions_landing_table (
+    "COMMITTEENAME" text,
+    "CANDIDATENAME" text,
+    "ELECTIONYEAR" text,
+    "CONTRIBUTORNAME" text,
+    "CONTRIBUTORTYPE" text,
+    "CONTRIBUTIONTYPE" text,
+    "ADDRESS" text,
+    "FULLADDRESS" text,
+    "WARD" text,
+    "EMPLOYER" text,
+    "EMPLOYERADDRESS" text,
+    "AMOUNT" text,
+    "DATEOFRECEIPT" text,
+    "ADDRESS_ID" text,
+    "XCOORD" text,
+    "YCOORD" text,
+    "LATITUDE" text,
+    "LONGITUDE" text,
+    "GIS_LAST_MOD_DTTM" text,
+    "OBJECTID" text
+);
+
+CREATE TABLE dc_financial_expenditures_landing_table (
+    "OBJECTID" text,
+    "CANDIDATENAME" text,
+    "PAYEE" text,
+    "ADDRESS" text,
+    "PURPOSE" text,
+    "AMOUNT" text,
+    "TRANSACTIONDATE" text,
+    "ADDRESS_ID" text,
+    "XCOORD" text,
+    "YCOORD" text,
+    "LATITUDE" text,
+    "LONGITUDE" text,
+    "FULLADDRESS" text,
+    "GIS_LAST_MOD_DTTM" text,
+    "WARD" text
+);
