@@ -44,3 +44,9 @@ fec/
 /states/
 
 .pytest_cache
+
+# Dagster temporary files
+.tmp_dagster_home_*/
+
+# Ruff cache
+.ruff_cache/
