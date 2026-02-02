@@ -257,11 +257,3 @@ The contributions site Rhode Island uses Cloudflare Bot Proection, seems quite b
 
 Below are shared services that's being used by the pipeline basically permanently.
 
-### Proxy Provider
-
-We're currently using IPRoyal for targeted (state level access) proxy, below are the logins.
-
-```text
-Email: fzlb.26@gmail.com
-Password: RM3cx^8YQzrzY75aYfKk$j73nXPJ@Zan
-```
